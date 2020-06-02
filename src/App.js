@@ -2,24 +2,19 @@ import React, { useEffect } from 'react';
 import './App.css';
 import useMarked from './useMarked';
 import useLocalStorage from './useLocalStorage';
-
-const MD = `# Markdown Previewer Heading
-\`\`\`javascript
-const hello = 'Hello, World!';
-console.log(hello);
-\`\`\``;
+import text from './text';
 
 function App() {
-  const [text, setText] = useLocalStorage('marked', '');
-  const previewer = useMarked(text);
+  const [data, setData] = useLocalStorage('markd', '');
+  const previewer = useMarked(data);
 
   useEffect(() => {
-    setText(str => str ? str : MD);
+    setData(str => str ? str : text);
     console.log('App useEffect');
-  }, [setText]);
+  }, [setData]);
 
   const handleChange = event =>
-    setText(event.target.value);
+    setData(event.target.value);
 
   return (
     <div className="App">
@@ -28,11 +23,9 @@ function App() {
         <a href="#preview">Preview</a>
       </div>
       <div id="md">
-        <textarea id="editor" value={text} onChange={handleChange} />
+        <textarea id="editor" value={data} onChange={handleChange} />
       </div>
-      <div id="preview">
-        <div dangerouslySetInnerHTML={previewer} />
-      </div>
+      <div id="preview" dangerouslySetInnerHTML={previewer} />
     </div>
   );
 }

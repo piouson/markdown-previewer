@@ -5,8 +5,7 @@ import DOMPurify from 'dompurify';
 const OPTIONS = {
   breaks: true,
   headerIds: false,
-  smartLists: true,
-  smartypants: true
+  smartLists: true
 };
 
 const useMarked = (text, options = null) => {
